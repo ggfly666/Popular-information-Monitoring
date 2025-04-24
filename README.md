@@ -1,1 +1,1 @@
-# scrapy-vue-123
+# 使用djano和vue3构建热门信息监测系统
