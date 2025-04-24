@@ -1,0 +1,9 @@
+django
+django-ninja
+django-cors-headers
+pymysql
+scrapy
+jieba 
+wordcloud
+pillow
+snownlp
