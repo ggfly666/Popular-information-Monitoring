@@ -38,16 +38,15 @@ user='xxx'
 password='xxx'
 db='xxx'
 ```
-###启动系统
-在backend目录下运行：
+6.在backend目录下运行：
 ```sh
 python manage.py runserver
 ```
-在scrapy目录下运行：
+7.在scrapy目录下运行：
 ```sh
 python main.py
 ```
-在frontend目录下运行：
+8.在frontend目录下运行：
 ```sh
 pnpm run
 ```
