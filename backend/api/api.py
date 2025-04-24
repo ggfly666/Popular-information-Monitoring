@@ -332,45 +332,35 @@ def wbhotinfo(request, username: str):
 def wbhotwordcloud(request, username: str):
     user = User.objects.filter(username=username).first()
     if user is not None:
-        wbs = Wb.objects.order_by('-uptime')[:90] 
-        if not wbs:
-            raise {'word_freq': {}}
-        else:
-            text_content = ' '.join([wb.info for wb in wbs])
-            words = jieba.lcut(text_content)
-            stopwords = {'的', '是', '了', '在', '等'}  
-            filtered_words = [word for word in words if word not in stopwords and len(word) > 1]
-            word_freq = {}
-            for word in filtered_words:
-                if word in word_freq:
-                    word_freq[word] += 1
-                else:
-                    word_freq[word] = 1
-            return {'word_freq': word_freq}
+        wbs = Bd.objects.order_by('-uptime')[:90]   
+        text_content = ' '.join([wb.info for wb in wbs])
+        words = jieba.lcut(text_content)
+        stopwords = {'的', '是', '了', '在', '等'}
+        filtered_words = [word for word in words if word not in stopwords and len(word) > 1]
+        word_freq = {}
+        for word in filtered_words:
+            if word in word_freq:
+                word_freq[word] += 1
+            else:
+                word_freq[word] = 1
+        bd = WordCloud(
+            font_path='./font/simhei.ttf',  
+            background_color='white',
+            width=800,
+            height=400, 
+        ).generate_from_frequencies(word_freq)
+        img = BytesIO()
+        plt.imshow(bd, interpolation='bilinear')
+        plt.axis("off")
+        plt.tight_layout(pad=0)
+        plt.savefig(img, format='PNG', transparent=True, bbox_inches='tight', pad_inches=0)
+        plt.close()
+        img.seek(0)
+        return HttpResponse(img.getvalue(), content_type='image/png')
     else:
-        raise HttpError(400, '用户凭证不正确！')
+        raise HttpError(400, '用户凭证不正确！') 
         
 
-@api.get('wblinechart')
-def wblinechart(request, username: str):
-    user = User.objects.filter(username=username).first()
-    if user is not None:
-        today = datetime.today()
-        month = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        wbs = Wb.objects.filter(uptime__gte=month).filter(ranking__in=[1, 2, 3]).order_by('ranking', 'uptime')
-        formatted_wbs = [
-            {
-                'ranking': wb.ranking,
-                'info': wb.info,
-                'url': wb.url,
-                'hot': wb.hot,
-                'uptime': wb.uptime.strftime('%Y-%m-%d %H:%M:%S')
-            }
-            for wb in wbs
-        ]
-        return formatted_wbs
-    else:
-        raise HttpError(400, '用户凭证不正确！')
 
 @api.get('wbhotsentiment')
 def wbhotsentiment(request, username: str):

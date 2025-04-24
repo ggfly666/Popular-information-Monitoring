@@ -11,15 +11,10 @@ const routes = [
     component: () => import('@/views/Register.vue')
   },
   { path: '/', 
-    redirect: '/sjdp',
+    redirect: '/home',
     component: () => import('@/views/Home.vue'), 
     meta: { requiresAuth: true }, 
     children : [
-      {
-        path: '/sjdp',
-        component: () => import('@/views/SJDP.vue'),
-        meta: { requiresAuth: true }
-      },
       {
         path: '/hotlist',
         component: () => import('@/views/HotList.vue'),
