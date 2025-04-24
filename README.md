@@ -15,19 +15,11 @@ pnpm install
 ```
 4.在django/setttings.py中配置数据库和发送邮件的设置,以下是一个示例：
 ```sh
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'xxx',
-        'USER': 'xxx',
-        'PASSWORD': 'xxx',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-        }
-    }
-}
+'NAME': 'xxx'
+'USER': 'xxx'
+'PASSWORD': 'xxx'
+'HOST': '127.0.0.1'
+'PORT': '3306'
 ```
 ```sh
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -37,4 +29,25 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'xxx'
 EMAIL_HOST_PASSWORD = 'xxx'
+```
+5.在scrapy/main.py中配置相同的数据库，以下是一个示例：
+```sh
+host='127.0.0.1'
+port=3306
+user='xxx'
+password='xxx'
+db='xxx'
+```
+6.启动系统
+在backend目录下运行：
+```sh
+python manage.py runserver
+```
+在scrapy目录下运行：
+```sh
+python main.py
+```
+在frontend目录下运行：
+```sh
+pnpm run
 ```
