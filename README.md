@@ -1,9 +1,12 @@
 ## 基于scrapy爬虫，使用django和vue3搭建的热门信息监测系统。
-
+### 项目介绍
+从B站、微博、百度在内的多个网络媒体平台上收集信息，为热门信息提供高效便捷的监测。
+### 系统截图
+![image](png/系统截图.png)
 ### 系统启动
 1. 启动mysql服务
 ```sh
-systemctl start mysql
+sudo systemctl start mysql
 ```
 2.安装python3的依赖包
 ```sh
@@ -32,11 +35,11 @@ EMAIL_HOST_PASSWORD = 'xxx'
 ```
 5.在scrapy/main.py中配置相同的数据库，以下是一个示例：
 ```sh
-host='127.0.0.1'
-port=3306
-user='xxx'
-password='xxx'
-db='xxx'
+'host'='127.0.0.1'
+'port'=3306
+'user'='xxx'
+'password'='xxx'
+'db'='xxx'
 ```
 6.在backend目录下运行：
 ```sh
