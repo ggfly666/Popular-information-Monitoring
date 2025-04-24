@@ -53,3 +53,7 @@ python main.py
 ```sh
 pnpm run
 ```
+9.访问：
+```sh
+http://127.0.0.1:5173/
+```
