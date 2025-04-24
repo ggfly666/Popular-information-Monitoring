@@ -38,7 +38,7 @@ user='xxx'
 password='xxx'
 db='xxx'
 ```
-6.启动系统
+###启动系统
 在backend目录下运行：
 ```sh
 python manage.py runserver
