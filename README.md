@@ -4,7 +4,7 @@
 ### 系统截图
 ![image](png/系统截图.png)
 ### 系统启动
-1. 启动mysql服务
+1.启动mysql服务
 ```sh
 sudo systemctl start mysql
 ```
